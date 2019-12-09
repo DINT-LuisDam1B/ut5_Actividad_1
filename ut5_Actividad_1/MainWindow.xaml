@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ut5_Actividad_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="chatBot" Height="700" Width="400">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Archivo">
+                <MenuItem Header="Nueva conversación" InputGestureText="CTRL+N">
+                    <MenuItem.Icon>
+                        <Image Source="/imagenes/nuevaConversacion.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Guardar conversación" InputGestureText="CTRL+G">
+                    <MenuItem.Icon>
+                        <Image Source="/imagenes/guardarConversacion.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Salir" InputGestureText="CTRL+S">
+                    <MenuItem.Icon>
+                        <Image Source="/imagenes/salir.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+            </MenuItem>
+            <MenuItem Header="_Herramientas">
+                <MenuItem Header="Configuración..." InputGestureText="CTRL+C">
+                    <MenuItem.Icon>
+                        <Image Source="/imagenes/configuracion.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Comprobar conexión" InputGestureText="CTRL+O">
+                    <MenuItem.Icon>
+                        <Image Source="imagenes/probarConexion.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar Height="40">
+                <Button>
+                    <Image Source="/imagenes/nuevaConversacion.png"/>
+                </Button>
+                <Button>
+                    <Image Source="/imagenes/guardarConversacion.png"/>
+                </Button>
+                <Separator/>
+                <Button>
+                    <Image Source="/imagenes/configuracion.png"/>
+                </Button>
+                <Button>
+                    <Image Source="/imagenes/probarConexion.png"/>
+                </Button>
+                <Separator/>
+                <Button>
+                    <Image Source="/imagenes/salir.png"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button DockPanel.Dock="Right" Height="34" Width="33">
+                <Image Source="imagenes/enviarMensaje.png"/>
+            </Button>
+            <TextBox Padding="8"></TextBox>
+        </DockPanel>
+
+        <ListBox Background="LightYellow"></ListBox>
         
-    </Grid>
+    </DockPanel>
 </Window>

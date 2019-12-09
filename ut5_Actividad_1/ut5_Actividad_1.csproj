@@ -111,5 +111,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\nuevaConversacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\configuracion.png" />
+    <Resource Include="imagenes\guardarConversacion.png" />
+    <Resource Include="imagenes\probarConexion.png" />
+    <Resource Include="imagenes\salir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\enviarMensaje.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
