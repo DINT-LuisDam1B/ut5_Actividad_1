@@ -123,5 +123,8 @@
   <ItemGroup>
     <Resource Include="imagenes\enviarMensaje.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\chatBot.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

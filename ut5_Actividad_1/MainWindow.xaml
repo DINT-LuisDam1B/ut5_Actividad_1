@@ -1,13 +1,13 @@
-﻿<Window x:Class="ut5_Actividad_1.MainWindow"
+﻿<Window x:Name="ChatBot" x:Class="ut5_Actividad_1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ut5_Actividad_1"
         mc:Ignorable="d"
-        Title="chatBot" Height="700" Width="400">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        Title="chatBot" Height="700" Width="400" Icon="imagenes/chatBot.png">
+    <DockPanel x:Name="contenedor_Principal">
+        <Menu x:Name="cabecera_Menu" DockPanel.Dock="Top">
             <MenuItem Header="_Archivo">
                 <MenuItem Header="Nueva conversación" InputGestureText="CTRL+N">
                     <MenuItem.Icon>
@@ -43,21 +43,21 @@
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Height="40">
-                <Button>
+                <Button x:Name="nuevaConversacion_Button">
                     <Image Source="/imagenes/nuevaConversacion.png"/>
                 </Button>
-                <Button>
+                <Button x:Name="guardarConversacion_Button">
                     <Image Source="/imagenes/guardarConversacion.png"/>
                 </Button>
                 <Separator/>
-                <Button>
+                <Button x:Name="configuracion_Button">
                     <Image Source="/imagenes/configuracion.png"/>
                 </Button>
-                <Button>
+                <Button x:Name="probarConexion_Button">
                     <Image Source="/imagenes/probarConexion.png"/>
                 </Button>
                 <Separator/>
-                <Button>
+                <Button x:Name="salir_Button">
                     <Image Source="/imagenes/salir.png"/>
                 </Button>
             </ToolBar>
