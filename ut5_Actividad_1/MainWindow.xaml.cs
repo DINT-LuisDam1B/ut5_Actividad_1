@@ -23,6 +23,14 @@ namespace ut5_Actividad_1
         public MainWindow()
         {
             InitializeComponent();
+     
+        }
+
+        private void Configuracion_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Configuracion config_Windows = new Configuracion();
+            config_Windows.Owner = this;
+            config_Windows.ShowDialog();
         }
     }
 }

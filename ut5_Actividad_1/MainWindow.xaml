@@ -50,7 +50,7 @@
                     <Image Source="/imagenes/guardarConversacion.png"/>
                 </Button>
                 <Separator/>
-                <Button x:Name="configuracion_Button">
+                <Button x:Name="configuracion_Button" Click="Configuracion_Button_Click">
                     <Image Source="/imagenes/configuracion.png"/>
                 </Button>
                 <Button x:Name="probarConexion_Button">
