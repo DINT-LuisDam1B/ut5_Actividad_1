@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker;
+using Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,7 @@ namespace ut5_Actividad_1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private QnAMakerRuntimeClient cliente;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +34,27 @@ namespace ut5_Actividad_1
             Configuracion config_Windows = new Configuracion();
             config_Windows.Owner = this;
             config_Windows.ShowDialog();
+        }
+
+        private async Task conexionAsync()
+        {
+            //Creamos el cliente de QnA
+            string EndPoint = Properties.Settings.Default.EndPoint;
+            string Key = Properties.Settings.Default.Key;
+            string Id = Properties.Settings.Default.Id;
+            cliente = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(Key)) { RuntimeEndpoint = EndPoint };
+
+            //Realizamos la pregunta a la API
+            string pregunta = "Vas a aprobarlas todas";
+            QnASearchResultList response = await cliente.Runtime.GenerateAnswerAsync(Id, new QueryDTO { Question = pregunta });
+            string respuesta = response.Answers[0].Answer;
+            MessageBox.Show(respuesta,"chat",MessageBoxButton.OK);
+
+        }
+
+        private async void ProbarConexion_Button_ClickAsync(object sender, RoutedEventArgs e)
+        {
+           await conexionAsync();
         }
     }
 }

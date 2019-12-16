@@ -1,7 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ut5_Actividad_1.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EndPoint" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://actividad51luisnarvaez.azurewebsites.net</Value>
+    </Setting>
+    <Setting Name="Id" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c3845dbd-79d1-43a0-8958-9a248d779c75</Value>
+    </Setting>
+    <Setting Name="Key" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2ad9ca5b-3e55-4cc1-882e-c695a7ef2e0e</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

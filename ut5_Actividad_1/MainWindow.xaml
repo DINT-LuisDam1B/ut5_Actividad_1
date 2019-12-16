@@ -53,7 +53,7 @@
                 <Button x:Name="configuracion_Button" Click="Configuracion_Button_Click">
                     <Image Source="/imagenes/configuracion.png"/>
                 </Button>
-                <Button x:Name="probarConexion_Button">
+                <Button x:Name="probarConexion_Button" Click="ProbarConexion_Button_ClickAsync">
                     <Image Source="/imagenes/probarConexion.png"/>
                 </Button>
                 <Separator/>

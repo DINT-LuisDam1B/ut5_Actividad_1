@@ -15,9 +15,9 @@ namespace ut5_Actividad_1
         public Color Color
         {
             get {
-                return (SolidColorBrush)_color;
+                return _color;
                 }
-            set;
+            set { this._color = value; }
         }
 
     }
