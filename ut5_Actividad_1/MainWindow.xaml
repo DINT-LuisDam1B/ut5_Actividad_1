@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:ut5_Actividad_1"
         mc:Ignorable="d"
         Title="chatBot" Height="700" Width="400" Icon="imagenes/chatBot.png">
+    
+    
     <DockPanel x:Name="contenedor_Principal">
         <Menu x:Name="cabecera_Menu" DockPanel.Dock="Top">
             <MenuItem Header="_Archivo">

@@ -45,10 +45,18 @@ namespace ut5_Actividad_1
             cliente = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(Key)) { RuntimeEndpoint = EndPoint };
 
             //Realizamos la pregunta a la API
-            string pregunta = "Vas a aprobarlas todas";
-            QnASearchResultList response = await cliente.Runtime.GenerateAnswerAsync(Id, new QueryDTO { Question = pregunta });
-            string respuesta = response.Answers[0].Answer;
-            MessageBox.Show(respuesta,"chat",MessageBoxButton.OK);
+            try
+            {
+                string pregunta = "Vas a aprobarlas todas";
+                QnASearchResultList response = await cliente.Runtime.GenerateAnswerAsync(Id, new QueryDTO { Question = pregunta });
+                
+                MessageBox.Show("Se ha realizado la conexión satisfactoriamente!!.","Conexión",MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+            }catch (Exception e)
+            {
+                MessageBox.Show("Fallo de conexión, Comprueba la conexión" + e.Message ,"Fallo Conexión",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+            
 
         }
 
