@@ -64,5 +64,23 @@ namespace ut5_Actividad_1
         {
            await conexionAsync();
         }
+
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (mensaje_TextBox.Text.Length == 0)
+            {
+                e.CanExecute = true;
+
+            }
+            else
+            {
+                e.CanExecute = false;
+            }
+        }
+
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }

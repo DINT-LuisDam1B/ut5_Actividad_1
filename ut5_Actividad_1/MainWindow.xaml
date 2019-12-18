@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:ut5_Actividad_1"
         mc:Ignorable="d"
         Title="chatBot" Height="700" Width="400" Icon="imagenes/chatBot.png">
-    
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="ApplicationCommands.New"
+            Executed="NewCommand_Executed"
+            CanExecute="NewCommand_CanExecute"/>
+        
+    </Window.CommandBindings>
     
     <DockPanel x:Name="contenedor_Principal">
         <Menu x:Name="cabecera_Menu" DockPanel.Dock="Top">
@@ -66,10 +72,11 @@
         </ToolBarTray>
 
         <DockPanel DockPanel.Dock="Bottom">
-            <Button DockPanel.Dock="Right" Height="34" Width="33">
+            <Button x:Name="enviarMensaje_Button" DockPanel.Dock="Right" Height="34" Width="33" 
+                    Command="ApplicationCommands.New">
                 <Image Source="imagenes/enviarMensaje.png"/>
             </Button>
-            <TextBox Padding="8"></TextBox>
+            <TextBox x:Name="mensaje_TextBox" Padding="8"></TextBox>
         </DockPanel>
 
         <ListBox Background="LightYellow"></ListBox>
