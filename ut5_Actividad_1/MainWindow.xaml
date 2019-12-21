@@ -13,6 +13,32 @@
             CanExecute="NewCommand_CanExecute"/>
         
     </Window.CommandBindings>
+    <Window.Resources>
+        <Style x:Name="usuarioBorder" x:Key="styleUsuario" TargetType="Border">
+            
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Emisor}" Value="True">
+                    <Setter Property="Background" Value="LemonChiffon"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Emisor}" Value="False">
+                    <Setter Property="Background" Value="BlueViolet"/>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+        <DataTemplate x:Key="plantilla_ListBox">
+            <Border Background="Azure" Style="{StaticResource styleUsuario}" BorderBrush="Black" BorderThickness="3" CornerRadius="5" Padding="6">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/imagenes/usuario.png" Width="25" Height="25"/>
+                        <Label Content="Usuario"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Texto}"/>
+                </StackPanel>
+            </Border>
+            
+        </DataTemplate>
+    </Window.Resources>
     
     <DockPanel x:Name="contenedor_Principal">
         <Menu x:Name="cabecera_Menu" DockPanel.Dock="Top">
@@ -79,7 +105,8 @@
             <TextBox x:Name="mensaje_TextBox" Padding="8"></TextBox>
         </DockPanel>
 
-        <ListBox Background="LightYellow"></ListBox>
+        <ListBox x:Name="listaMensajes_ListBox" Background="LightYellow" ItemsSource="{Binding}" SelectedValuePath="Texto"
+                 ItemTemplate="{StaticResource plantilla_ListBox}"></ListBox>
         
     </DockPanel>
 </Window>

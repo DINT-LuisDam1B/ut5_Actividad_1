@@ -2,6 +2,7 @@
 using Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,18 @@ namespace ut5_Actividad_1
     public partial class MainWindow : Window
     {
         private QnAMakerRuntimeClient cliente;
+        private string EndPoint = Properties.Settings.Default.EndPoint;
+        private string Key = Properties.Settings.Default.Key;
+        private string Id = Properties.Settings.Default.Id;
+
+
+        private ObservableCollection<Mensaje> listaMensajes;
         public MainWindow()
         {
             InitializeComponent();
-     
+            listaMensajes = new ObservableCollection<Mensaje>();
+            listaMensajes_ListBox.DataContext = listaMensajes;
+
         }
 
         private void Configuracion_Button_Click(object sender, RoutedEventArgs e)
@@ -39,9 +48,7 @@ namespace ut5_Actividad_1
         private async Task conexionAsync()
         {
             //Creamos el cliente de QnA
-            string EndPoint = Properties.Settings.Default.EndPoint;
-            string Key = Properties.Settings.Default.Key;
-            string Id = Properties.Settings.Default.Id;
+            
             cliente = new QnAMakerRuntimeClient(new EndpointKeyServiceClientCredentials(Key)) { RuntimeEndpoint = EndPoint };
 
             //Realizamos la pregunta a la API
@@ -60,6 +67,28 @@ namespace ut5_Actividad_1
 
         }
 
+        private async Task respuestaAsync(Mensaje mensajeUsuario, Mensaje mensajeRespuesta)
+        {
+           
+            try
+            {
+                string pregunta = mensajeUsuario.Texto;
+                QnASearchResultList response = await cliente.Runtime.GenerateAnswerAsync(Id, new QueryDTO { Question = pregunta });
+
+                string respuesta = response.Answers[0].Answer;
+
+                mensajeRespuesta.Texto = respuesta;
+                mensajeRespuesta.Emisor = false;
+                
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Fallo de conexión, Comprueba la conexión" + e.Message, "Fallo Conexión", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
         private async void ProbarConexion_Button_ClickAsync(object sender, RoutedEventArgs e)
         {
            await conexionAsync();
@@ -67,7 +96,7 @@ namespace ut5_Actividad_1
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (mensaje_TextBox.Text.Length == 0)
+            if (mensaje_TextBox != null && (mensaje_TextBox.Text.Length != 0))
             {
                 e.CanExecute = true;
 
@@ -76,10 +105,22 @@ namespace ut5_Actividad_1
             {
                 e.CanExecute = false;
             }
+            
         }
 
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            crearMensaje();
+
+        }
+
+       private async void crearMensaje()
+       {
+            Mensaje mensajeRespuesta = new Mensaje();
+            Mensaje mensajeUsuario = new Mensaje(true, mensaje_TextBox.Text.ToString());
+            listaMensajes.Add(mensajeUsuario);
+            await respuestaAsync(mensajeUsuario, mensajeRespuesta);
+            listaMensajes.Add(mensajeRespuesta);
 
         }
     }
