@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ut5_Actividad_1"
         mc:Ignorable="d"
+        xmlns:properties="clr-namespace:ut5_Actividad_1.Properties"
         Title="chatBot" Height="700" Width="400" Icon="imagenes/chatBot.png">
     <Window.CommandBindings>
         <CommandBinding
@@ -12,26 +13,34 @@
             Executed="NewCommand_Executed"
             CanExecute="NewCommand_CanExecute"/>
         
+        <CommandBinding
+            Command="local:CustomCommands.Salir"
+            Executed="SalirCommand_Executed"
+            />
+        
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Name="usuarioBorder" x:Key="styleUsuario" TargetType="Border">
-            
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Background" Value="{Binding Source={x:Static properties:Settings.Default},Path=ColorUsuario}"/>
+
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Emisor}" Value="True">
-                    <Setter Property="Background" Value="LemonChiffon"/>
+                <DataTrigger Binding="{Binding Path=Emisor}" Value="false">
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Emisor}" Value="False">
-                    <Setter Property="Background" Value="BlueViolet"/>
+                <DataTrigger Binding="{Binding Path=Emisor}" Value="false">
+                    <Setter Property="Background" Value="{Binding Source={x:Static properties:Settings.Default},Path=ColorRobot}"/>
                 </DataTrigger>
+               
             </Style.Triggers>
 
         </Style>
         <DataTemplate x:Key="plantilla_ListBox">
-            <Border Background="Azure" Style="{StaticResource styleUsuario}" BorderBrush="Black" BorderThickness="3" CornerRadius="5" Padding="6">
+            <Border Style="{StaticResource styleUsuario}" BorderBrush="Black" BorderThickness="3" CornerRadius="5" Padding="6">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/imagenes/usuario.png" Width="25" Height="25"/>
-                        <Label Content="Usuario"/>
+                        <Label Content="{Binding Actor}"/>
                     </StackPanel>
                     <TextBlock Text="{Binding Texto}"/>
                 </StackPanel>
@@ -91,7 +100,7 @@
                     <Image Source="/imagenes/probarConexion.png"/>
                 </Button>
                 <Separator/>
-                <Button x:Name="salir_Button">
+                <Button x:Name="salir_Button" Command="local:CustomCommands.Salir">
                     <Image Source="/imagenes/salir.png"/>
                 </Button>
             </ToolBar>
@@ -105,7 +114,7 @@
             <TextBox x:Name="mensaje_TextBox" Padding="8"></TextBox>
         </DockPanel>
 
-        <ListBox x:Name="listaMensajes_ListBox" Background="LightYellow" ItemsSource="{Binding}" SelectedValuePath="Texto"
+        <ListBox x:Name="listaMensajes_ListBox" Background="{Binding Source={x:Static properties:Settings.Default},Path=ColorFondo}" ItemsSource="{Binding}" SelectedValuePath="Texto"
                  ItemTemplate="{StaticResource plantilla_ListBox}"></ListBox>
         
     </DockPanel>

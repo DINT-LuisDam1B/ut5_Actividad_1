@@ -24,38 +24,32 @@ namespace ut5_Actividad_1
         {
             
             InitializeComponent();
-            LoadSystemColors();
-          
+            colorFondo_ComboBox.ItemsSource = typeof(Colors).GetProperties();
+            colorUsuario_ComboBox.ItemsSource = typeof(Colors).GetProperties();
+            colorRobot_ComboBox.ItemsSource = typeof(Colors).GetProperties();
+
         }
 
-        public void LoadSystemColors()
+        private void Aceptar_Button_Click(object sender, RoutedEventArgs e)
         {
-            List<ItemColor> sysColorList = new List<ItemColor>();
-            Type t = typeof(System.Windows.SystemColors);
-            PropertyInfo[] propInfo = t.GetProperties();
-            foreach (PropertyInfo p in propInfo)
-            {
-                if (p.PropertyType == typeof(Color))
-                {
-                    ItemColor list = new ItemColor();
-                    list.Color = (Color)p.GetValue(new Color(),
-                        BindingFlags.GetProperty, null, null, null);
-                    list.Name = p.Name;
+            // El item del combobox tiene dos valores donde es nombre del color tipo string es el segundo campo
+            // aplicamos String.Split y nos quedamos con el color.
+            string[] colorFondo = colorFondo_ComboBox.SelectedValue.ToString().Split(' ');
+            string[] colorUsuario = colorFondo_ComboBox.SelectedValue.ToString().Split(' ');
+            string[] colorRobot = colorFondo_ComboBox.SelectedValue.ToString().Split(' ');
 
-                    sysColorList.Add(list);
-                }
-                else if (p.PropertyType == typeof(SolidColorBrush))
-                {
-                    ItemColor list = new ItemColor();
-                    list.Color = ((SolidColorBrush)p.GetValue(new SolidColorBrush(),
-                        BindingFlags.GetProperty, null, null, null)).Color;
-                    list.Name = p.Name;
+            // añadimos el color a las propiedades de configuración definidas previamente
+            // como valor por defecto las he puesto todas con valor = "White".
+            Properties.Settings.Default.ColorFondo = colorFondo[1];
+            Properties.Settings.Default.ColorUsuario = colorUsuario[1];
+            Properties.Settings.Default.ColorRobot = colorRobot[1];
 
-                    sysColorList.Add(list);
-                }
-            }
-            ColorList_ComboBox.ItemsSource = sysColorList;
+            this.Close();
         }
 
+        private void Cancelar_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

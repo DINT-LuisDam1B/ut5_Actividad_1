@@ -49,5 +49,41 @@ namespace ut5_Actividad_1.Properties {
                 return ((string)(this["Key"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public string ColorFondo {
+            get {
+                return ((string)(this["ColorFondo"]));
+            }
+            set {
+                this["ColorFondo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public string ColorUsuario {
+            get {
+                return ((string)(this["ColorUsuario"]));
+            }
+            set {
+                this["ColorUsuario"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public string ColorRobot {
+            get {
+                return ((string)(this["ColorRobot"]));
+            }
+            set {
+                this["ColorRobot"] = value;
+            }
+        }
     }
 }

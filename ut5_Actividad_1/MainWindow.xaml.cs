@@ -79,6 +79,7 @@ namespace ut5_Actividad_1
 
                 mensajeRespuesta.Texto = respuesta;
                 mensajeRespuesta.Emisor = false;
+                mensajeRespuesta.Actor = "Robot";
                 
 
             }
@@ -117,11 +118,13 @@ namespace ut5_Actividad_1
        private async void crearMensaje()
        {
             Mensaje mensajeRespuesta = new Mensaje();
-            Mensaje mensajeUsuario = new Mensaje(true, mensaje_TextBox.Text.ToString());
+            Mensaje mensajeUsuario = new Mensaje(true,"Usuario", mensaje_TextBox.Text.ToString());
             listaMensajes.Add(mensajeUsuario);
             await respuestaAsync(mensajeUsuario, mensajeRespuesta);
             listaMensajes.Add(mensajeRespuesta);
 
         }
+
+        
     }
 }

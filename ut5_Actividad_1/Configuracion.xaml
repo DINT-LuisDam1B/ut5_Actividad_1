@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ut5_Actividad_1"
         mc:Ignorable="d"
-        Title="Configuración de la aplicación" Height="450" Width="800">
+        Title="Configuración de la aplicación" Height="450" Width="500">
     <Window.Resources>
         <Style x:Name="TextBlck_Style" x:Key="textBlockStyle" TargetType="TextBlock">
             <Setter Property="Margin" Value="10"/>
@@ -15,9 +15,9 @@
         </Style>
 
         <DataTemplate x:Key="plantillaComboBox">
-            <StackPanel Orientation="Horizontal">
-                <Rectangle Width="30" Fill="{Binding Color}"/>
-                <TextBlock Width="100" Text="{Binding Name}"/>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Rectangle Width="40"  Height="20" Fill="{Binding Name}"/>
+                <TextBlock Width="100" Text="{Binding Name}" HorizontalAlignment="Center" TextAlignment="Center"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -26,22 +26,22 @@
         <DockPanel Style="{StaticResource dockPanelStyle}">
             <TextBlock x:Name="colorFondo_TextBox" DockPanel.Dock="Left" Text="Color de fondo"
                        Style="{StaticResource ResourceKey=textBlockStyle}"/>
-            <ComboBox ></ComboBox>
+            <ComboBox x:Name="colorFondo_ComboBox" ItemTemplate="{StaticResource plantillaComboBox}"></ComboBox>
         </DockPanel>
         <DockPanel  Style="{StaticResource dockPanelStyle}">
-            <TextBlock x:Name="colorUsuario_TextBox" DockPanel.Dock="Left" Text="Color de fondo"
+            <TextBlock x:Name="colorUsuario_TextBox" DockPanel.Dock="Left" Text="Color del usuario"
                        Style="{StaticResource ResourceKey=textBlockStyle}"/>
-            <ComboBox x:Name="ColorList_ComboBox" ItemTemplate="{StaticResource plantillaComboBox}"></ComboBox>
+            <ComboBox x:Name="colorUsuario_ComboBox" ItemTemplate="{StaticResource plantillaComboBox}"></ComboBox>
         </DockPanel>
         <DockPanel  Style="{StaticResource dockPanelStyle}">
-            <TextBlock x:Name="colorRobot_TextBox" DockPanel.Dock="Left" Text="Color de fondo"
+            <TextBlock x:Name="colorRobot_TextBox" DockPanel.Dock="Left" Text="Color del robot"
                        Style="{StaticResource ResourceKey=textBlockStyle}"/>
-            <ComboBox></ComboBox>
+            <ComboBox x:Name="colorRobot_ComboBox" ItemTemplate="{StaticResource plantillaComboBox}"></ComboBox>
         </DockPanel>
         <StackPanel x:Name="aceptarCancelar_StackPanel" Orientation="Horizontal"
                     HorizontalAlignment="Right" Margin="10">
-            <Button x:Name="aceptar_Button" Content="Aceptar" Margin="5" Padding="25,5"/>
-            <Button x:Name="cancelar_Button" Content="cancelar" Margin="5" Padding="25,5"/>
+            <Button x:Name="aceptar_Button" Content="Aceptar" Margin="5" Padding="25,5" Click="Aceptar_Button_Click"/>
+            <Button x:Name="cancelar_Button" Content="cancelar" Margin="5" Padding="25,5" Click="Cancelar_Button_Click"/>
             
 
         </StackPanel>

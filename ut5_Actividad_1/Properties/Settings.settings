@@ -11,5 +11,14 @@
     <Setting Name="Key" Type="System.String" Scope="Application">
       <Value Profile="(Default)">2ad9ca5b-3e55-4cc1-882e-c695a7ef2e0e</Value>
     </Setting>
+    <Setting Name="ColorFondo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ColorUsuario" Type="System.String" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ColorRobot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
