@@ -12,58 +12,74 @@
             Command="ApplicationCommands.New"
             Executed="NewCommand_Executed"
             CanExecute="NewCommand_CanExecute"/>
-        
+        <CommandBinding 
+            Command="local:CustomCommands.Guardar"
+            Executed="GuardarCommand_Executed"
+            CanExecute="GuardarCommand_CanExecute"/>
+        <CommandBinding 
+            Command="local:CustomCommands.Propiedades"
+            Executed="PropiedadesCommand_Executed"/>
+
         <CommandBinding
             Command="local:CustomCommands.Salir"
-            Executed="SalirCommand_Executed"
-            />
+            Executed="SalirCommand_Executed"/>
+        <CommandBinding
+            Command="local:CustomCommands.Enviar"
+            Executed="EnviarCommand_Executed"
+            CanExecute="EnviarCommand_CanExecute"/>
+        <CommandBinding
+            Command="local:CustomCommands.Conectar"
+            Executed="ConectarCommand_ExecutedAsync"/>
         
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Name="usuarioBorder" x:Key="styleUsuario" TargetType="Border">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="3"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Background" Value="{Binding Source={x:Static properties:Settings.Default},Path=ColorUsuario}"/>
 
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Emisor}" Value="false">
                     <Setter Property="HorizontalAlignment" Value="Right"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Emisor}" Value="false">
                     <Setter Property="Background" Value="{Binding Source={x:Static properties:Settings.Default},Path=ColorRobot}"/>
                 </DataTrigger>
-               
             </Style.Triggers>
 
         </Style>
-        <DataTemplate x:Key="plantilla_ListBox">
-            <Border Style="{StaticResource styleUsuario}" BorderBrush="Black" BorderThickness="3" CornerRadius="5" Padding="6">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/imagenes/usuario.png" Width="25" Height="25"/>
-                        <Label Content="{Binding Actor}"/>
-                    </StackPanel>
-                    <TextBlock Text="{Binding Texto}"/>
-                </StackPanel>
-            </Border>
-            
-        </DataTemplate>
+
+        <Style x:Name="StyleImagen" x:Key="styleImagen" TargetType="Image">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Source" Value="/imagenes/usuario.png"/>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Emisor}" Value="false">
+                    <Setter Property="Source" Value="/imagenes/robot.png"/>
+                    
+                </DataTrigger>
+            </Style.Triggers>
+
+
+        </Style>
+
     </Window.Resources>
     
     <DockPanel x:Name="contenedor_Principal">
         <Menu x:Name="cabecera_Menu" DockPanel.Dock="Top">
             <MenuItem Header="_Archivo">
-                <MenuItem Header="Nueva conversación" InputGestureText="CTRL+N">
+                <MenuItem Header="Nueva conversación" Command="ApplicationCommands.New" InputGestureText="CTRL+N">
                     <MenuItem.Icon>
                         <Image Source="/imagenes/nuevaConversacion.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Guardar conversación" InputGestureText="CTRL+G">
+                <MenuItem Header="Guardar conversación" Command="ApplicationCommands.Save" InputGestureText="CTRL+G">
                     <MenuItem.Icon>
                         <Image Source="/imagenes/guardarConversacion.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="Salir" InputGestureText="CTRL+S">
+                <MenuItem Header="Salir" Command="local:CustomCommands.Salir" InputGestureText="CTRL+S">
                     <MenuItem.Icon>
                         <Image Source="/imagenes/salir.png"/>
                     </MenuItem.Icon>
@@ -71,12 +87,12 @@
                 
             </MenuItem>
             <MenuItem Header="_Herramientas">
-                <MenuItem Header="Configuración..." InputGestureText="CTRL+C">
+                <MenuItem Header="Configuración..." Command="local:CustomCommands.Propiedades" InputGestureText="CTRL+C">
                     <MenuItem.Icon>
                         <Image Source="/imagenes/configuracion.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Comprobar conexión" InputGestureText="CTRL+O">
+                <MenuItem Header="Comprobar conexión" Command="local:CustomCommands.Conectar" InputGestureText="CTRL+O">
                     <MenuItem.Icon>
                         <Image Source="imagenes/probarConexion.png"/>
                     </MenuItem.Icon>
@@ -93,10 +109,10 @@
                     <Image Source="/imagenes/guardarConversacion.png"/>
                 </Button>
                 <Separator/>
-                <Button x:Name="configuracion_Button" Click="Configuracion_Button_Click">
+                <Button x:Name="configuracion_Button" Command="local:CustomCommands.Propiedades">
                     <Image Source="/imagenes/configuracion.png"/>
                 </Button>
-                <Button x:Name="probarConexion_Button" Click="ProbarConexion_Button_ClickAsync">
+                <Button x:Name="probarConexion_Button" Command="local:CustomCommands.Conectar">
                     <Image Source="/imagenes/probarConexion.png"/>
                 </Button>
                 <Separator/>
@@ -108,14 +124,28 @@
 
         <DockPanel DockPanel.Dock="Bottom">
             <Button x:Name="enviarMensaje_Button" DockPanel.Dock="Right" Height="34" Width="33" 
-                    Command="ApplicationCommands.New">
+                    Command="local:CustomCommands.Enviar">
                 <Image Source="imagenes/enviarMensaje.png"/>
             </Button>
             <TextBox x:Name="mensaje_TextBox" Padding="8"></TextBox>
         </DockPanel>
 
-        <ListBox x:Name="listaMensajes_ListBox" Background="{Binding Source={x:Static properties:Settings.Default},Path=ColorFondo}" ItemsSource="{Binding}" SelectedValuePath="Texto"
-                 ItemTemplate="{StaticResource plantilla_ListBox}"></ListBox>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+             <ItemsControl x:Name="listaMensajes_ListBox" Background="{Binding Source={x:Static properties:Settings.Default},Path=ColorFondo}" ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource styleUsuario}" BorderBrush="Black" BorderThickness="3" CornerRadius="5">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{StaticResource styleImagen}"/>
+                                    <Label Content="{Binding Actor}" FontWeight="Bold" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding Texto}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>   
     </DockPanel>
 </Window>

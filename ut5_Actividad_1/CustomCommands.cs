@@ -19,5 +19,45 @@ namespace ut5_Actividad_1
                     new KeyGesture(Key.S, ModifierKeys.Control)
                 }
             );
+        public static readonly RoutedUICommand Enviar = new RoutedUICommand
+            (
+                "Enviar",
+                "Enviar",
+                typeof(CustomCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.U, ModifierKeys.Control)
+                }
+            );
+        public static readonly RoutedUICommand Guardar = new RoutedUICommand
+            (
+                "Guardar",
+                "Guardar",
+                typeof(CustomCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.G, ModifierKeys.Control)
+                }
+            );
+        public static readonly RoutedUICommand Propiedades = new RoutedUICommand
+           (
+               "Propiedades",
+               "Propiedades",
+               typeof(CustomCommands),
+               new InputGestureCollection()
+               {
+                    new KeyGesture(Key.C, ModifierKeys.Control)
+               }
+           );
+        public static readonly RoutedUICommand Conectar = new RoutedUICommand
+           (
+               "Conectar",
+               "Conectar",
+               typeof(CustomCommands),
+               new InputGestureCollection()
+               {
+                    new KeyGesture(Key.O, ModifierKeys.Control)
+               }
+           );
     }
 }

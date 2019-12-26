@@ -35,8 +35,8 @@ namespace ut5_Actividad_1
             // El item del combobox tiene dos valores donde es nombre del color tipo string es el segundo campo
             // aplicamos String.Split y nos quedamos con el color.
             string[] colorFondo = colorFondo_ComboBox.SelectedValue.ToString().Split(' ');
-            string[] colorUsuario = colorFondo_ComboBox.SelectedValue.ToString().Split(' ');
-            string[] colorRobot = colorFondo_ComboBox.SelectedValue.ToString().Split(' ');
+            string[] colorUsuario = colorUsuario_ComboBox.SelectedValue.ToString().Split(' ');
+            string[] colorRobot = colorRobot_ComboBox.SelectedValue.ToString().Split(' ');
 
             // añadimos el color a las propiedades de configuración definidas previamente
             // como valor por defecto las he puesto todas con valor = "White".

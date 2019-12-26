@@ -30,6 +30,8 @@ namespace ut5_Actividad_1
 
 
         private ObservableCollection<Mensaje> listaMensajes;
+
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -37,14 +39,6 @@ namespace ut5_Actividad_1
             listaMensajes_ListBox.DataContext = listaMensajes;
 
         }
-
-        private void Configuracion_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Configuracion config_Windows = new Configuracion();
-            config_Windows.Owner = this;
-            config_Windows.ShowDialog();
-        }
-
         private async Task conexionAsync()
         {
             //Creamos el cliente de QnA
@@ -95,7 +89,7 @@ namespace ut5_Actividad_1
            await conexionAsync();
         }
 
-        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void EnviarCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (mensaje_TextBox != null && (mensaje_TextBox.Text.Length != 0))
             {
@@ -109,7 +103,7 @@ namespace ut5_Actividad_1
             
         }
 
-        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void EnviarCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             crearMensaje();
 
@@ -123,8 +117,49 @@ namespace ut5_Actividad_1
             await respuestaAsync(mensajeUsuario, mensajeRespuesta);
             listaMensajes.Add(mensajeRespuesta);
 
+       }
+
+        private void SalirCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
-        
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            listaMensajes.Clear();
+
+        }
+
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (listaMensajes.Count > 0) e.CanExecute = true;
+            else e.CanExecute = false;
+        }
+
+        private void GuardarCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            listaMensajes.Clear();
+
+        }
+
+        private void GuardarCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (listaMensajes.Count > 0) e.CanExecute = true;
+            else e.CanExecute = false;
+        }
+
+        private void PropiedadesCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Configuracion config_Windows = new Configuracion();
+            config_Windows.Owner = this;
+            config_Windows.ShowDialog();
+
+        }
+
+        private async void ConectarCommand_ExecutedAsync(object sender, ExecutedRoutedEventArgs e)
+        {
+            await conexionAsync();
+
+        }
     }
 }
