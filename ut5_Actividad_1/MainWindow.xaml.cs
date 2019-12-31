@@ -29,10 +29,8 @@ namespace ut5_Actividad_1
         private string Key = Properties.Settings.Default.Key;
         private string Id = Properties.Settings.Default.Id;
 
+        private ObservableCollection<Mensaje> listaMensajes = null;
 
-        private ObservableCollection<Mensaje> listaMensajes;
-
-        
         public MainWindow()
         {
             InitializeComponent();
@@ -90,6 +88,8 @@ namespace ut5_Actividad_1
            await conexionAsync();
         }
 
+        //COMANDOS DEFINIDOS PARA LA APLICACIÓN
+
         private void EnviarCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (mensaje_TextBox != null && (mensaje_TextBox.Text.Length != 0))
@@ -115,9 +115,9 @@ namespace ut5_Actividad_1
        private async void CrearMensaje()
        {
             Mensaje mensajeRespuesta = new Mensaje();
-            Mensaje mensajeUsuario = new Mensaje(true,"Usuario", mensaje_TextBox.Text.ToString());
+            Mensaje mensajeUsuario = new Mensaje(true,"Usuario", mensaje_TextBox.Text.ToString());//Creamos el mensaje introducido con el usuario y lo añadimos a la lista.
             listaMensajes.Add(mensajeUsuario);
-            await respuestaAsync(mensajeUsuario, mensajeRespuesta);
+            await respuestaAsync(mensajeUsuario, mensajeRespuesta);//Obtenemos las respuesta y creamos el mensaje con esa respuesta y la añadimos a la lista
             listaMensajes.Add(mensajeRespuesta);
 
        }
@@ -135,7 +135,7 @@ namespace ut5_Actividad_1
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (listaMensajes.Count > 0) e.CanExecute = true;
+            if (listaMensajes != null && listaMensajes.Count > 0) e.CanExecute = true;
             else e.CanExecute = false;
         }
 
@@ -147,7 +147,7 @@ namespace ut5_Actividad_1
 
         private void GuardarCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (listaMensajes.Count > 0 && listaMensajes != null) e.CanExecute = true;
+            if (listaMensajes != null && listaMensajes.Count != 0) e.CanExecute = true;
             else e.CanExecute = false;
         }
 

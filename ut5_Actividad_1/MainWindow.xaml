@@ -99,7 +99,7 @@
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Height="40">
-                <Button x:Name="nuevaConversacion_Button">
+                <Button x:Name="nuevaConversacion_Button" Command="ApplicationCommands.New">
                     <Image Source="/imagenes/nuevaConversacion.png"/>
                 </Button>
                 <Button x:Name="guardarConversacion_Button" Command="local:CustomCommands.Guardar">
