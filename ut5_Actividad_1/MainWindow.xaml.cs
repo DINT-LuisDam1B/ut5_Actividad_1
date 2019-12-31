@@ -3,6 +3,7 @@ using Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,11 +106,13 @@ namespace ut5_Actividad_1
 
         private void EnviarCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            crearMensaje();
+            CrearMensaje();
+
+            mensaje_TextBox.Clear();
 
         }
 
-       private async void crearMensaje()
+       private async void CrearMensaje()
        {
             Mensaje mensajeRespuesta = new Mensaje();
             Mensaje mensajeUsuario = new Mensaje(true,"Usuario", mensaje_TextBox.Text.ToString());
@@ -138,13 +141,13 @@ namespace ut5_Actividad_1
 
         private void GuardarCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            listaMensajes.Clear();
+            GuardarConversacion();
 
         }
 
         private void GuardarCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (listaMensajes.Count > 0) e.CanExecute = true;
+            if (listaMensajes.Count > 0 && listaMensajes != null) e.CanExecute = true;
             else e.CanExecute = false;
         }
 
@@ -159,6 +162,25 @@ namespace ut5_Actividad_1
         private async void ConectarCommand_ExecutedAsync(object sender, ExecutedRoutedEventArgs e)
         {
             await conexionAsync();
+
+        }
+
+        //Metodo para guardar la conversación.
+        private void GuardarConversacion()
+        {
+            // El archivo txt generado se guarda en la ubicación por defecto
+            // /bin/Debug/Conversacion.txt
+            using (StreamWriter sw = new StreamWriter("Conversacion.txt",false,Encoding.UTF8))
+            {
+                foreach (Mensaje mensaje in listaMensajes)
+                {
+                    sw.WriteLine("Actor: " + mensaje.Actor + 
+                                " - Mensaje:  " + mensaje.Texto);
+
+                }
+
+                MessageBox.Show("Conversación Guardada con exito","Guardar Conversación",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
 
         }
     }

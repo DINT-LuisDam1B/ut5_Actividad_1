@@ -56,11 +56,8 @@
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Emisor}" Value="false">
                     <Setter Property="Source" Value="/imagenes/robot.png"/>
-                    
                 </DataTrigger>
             </Style.Triggers>
-
-
         </Style>
 
     </Window.Resources>
@@ -73,7 +70,7 @@
                         <Image Source="/imagenes/nuevaConversacion.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Guardar conversación" Command="ApplicationCommands.Save" InputGestureText="CTRL+G">
+                <MenuItem Header="Guardar conversación" Command="local:CustomCommands.Guardar" InputGestureText="CTRL+G">
                     <MenuItem.Icon>
                         <Image Source="/imagenes/guardarConversacion.png"/>
                     </MenuItem.Icon>
@@ -105,7 +102,7 @@
                 <Button x:Name="nuevaConversacion_Button">
                     <Image Source="/imagenes/nuevaConversacion.png"/>
                 </Button>
-                <Button x:Name="guardarConversacion_Button">
+                <Button x:Name="guardarConversacion_Button" Command="local:CustomCommands.Guardar">
                     <Image Source="/imagenes/guardarConversacion.png"/>
                 </Button>
                 <Separator/>
@@ -127,7 +124,7 @@
                     Command="local:CustomCommands.Enviar">
                 <Image Source="imagenes/enviarMensaje.png"/>
             </Button>
-            <TextBox x:Name="mensaje_TextBox" Padding="8"></TextBox>
+            <TextBox x:Name="mensaje_TextBox" Padding="8" AcceptsReturn="True"></TextBox>
         </DockPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
